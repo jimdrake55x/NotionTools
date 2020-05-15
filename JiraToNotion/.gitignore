@@ -6,6 +6,11 @@ __pycache__/
 # C extensions
 *.so
 
+# Config files
+configs/*
+!configs/example_*
+!configs/README*
+
 # Distribution / packaging
 .Python
 build/
