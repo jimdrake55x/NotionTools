@@ -20,13 +20,9 @@ def test_insert_page():
     # Page to edit
     page = client.get_block(base_page)
 
-    newCheckBox = page.children.add_new(
-        TodoBlock, title="Something to get done")
-    newCheckBox.checked = True
-
     print("The current title is:", page.title)
 
-    page.title = "The title is changed, GET USED TO IT"
+    page.title = "The title is changed"
 
 
 def load_notion_configs():
