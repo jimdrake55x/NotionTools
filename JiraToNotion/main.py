@@ -1,4 +1,4 @@
-from notion_builder.notion_builder import test_insert_page
+from response_parser.jira_response_parser import parse_response_to_all_sprints
 
 if __name__ == '__main__':
-    test_insert_page()
+    test = parse_response_to_all_sprints()
