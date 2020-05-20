@@ -1,5 +1,6 @@
 from config_builder.config_builder import get_file_data
 from models.sprint import Sprint
+from constants.constants import JIRA_SPRINTS_URL, JIRA_SPRINTS_URL_PROJECT_REPLACE
 import json
 import os
 import requests
@@ -10,7 +11,9 @@ def make_sprint_requests():
     username = jira_data['username']
     token = jira_data['token']
     project_number = jira_data['project_number']
-    api = f'https://hudl-jira.atlassian.net/rest/agile/1.0/board/{project_number}/sprint'
+
+    api = JIRA_SPRINTS_URL.replace(
+        JIRA_SPRINTS_URL_PROJECT_REPLACE, project_number)
 
     try:
         # Fetch sprints from Jira
