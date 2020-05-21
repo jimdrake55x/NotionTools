@@ -1,8 +1,6 @@
-
-# Jira request constants
-JIRA_SPRINTS_URL = 'https://hudl-jira.atlassian.net/rest/agile/1.0/board/{pn}/sprint'
-JIRA_SPRINTS_URL_PROJECT_REPLACE = '{pn}'
-
+# Jira API
+JIRA_API_EVAL_URL = 'https://{br}.atlassian.net/rest/api/3/expression/eval'
+JIRA_API_BASE_REPLACE = '{br}'
 # Folder Path Constants
 FOLDER_DATA = './JiraToNotion/data/'
 FOLDER_DATA_FILE_REPLACE = '{f}'
