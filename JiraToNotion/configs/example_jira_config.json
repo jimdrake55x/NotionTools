@@ -1,0 +1,6 @@
+{
+  "token": "",
+  "username": "",
+  "board_number": "",
+  "jira_cloud_base": "" //https://<jira_cloud_base>.atlassian.net/rest/api/3/
+}
