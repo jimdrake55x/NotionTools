@@ -36,6 +36,7 @@ def query_issues_for_sprint(sprint):
 
     return __make_jira_jql_request(jql)
 
+
 def query_specific_issue(issue_name):
     jql_issue = "issue = " + issue_name
     jql = json.dumps({
@@ -45,7 +46,9 @@ def query_specific_issue(issue_name):
             "created",
             "assignee",
             "reporter",
-            "subtasks"
+            "subtasks",
+            "labels",
+            "status",
         ]
     })
 

@@ -4,6 +4,7 @@ from models.jira_config import Jira_Config
 from models.sprint import Sprint
 from models.ticket import Ticket
 from models.user import User
+import datetime
 
 
 def parse_query_active_sprints_response():
@@ -25,6 +26,7 @@ def parse_query_active_sprints_response():
             sprint.tickets.append(Ticket(name, summary, "", ""))
     return active_sprints
 
+
 def parse_query_specific_ticket(ticket_name):
     response = query_specific_issue(ticket_name)
     issue = response['issues'][0]
@@ -32,15 +34,15 @@ def parse_query_specific_ticket(ticket_name):
     config = Jira_Config()
 
     # Ticket Link
-    link = JIRA_USER_TICKET.replace(JIRA_USER_BASE_REPLACE, config.jira_cloud_base)
+    link = JIRA_USER_TICKET.replace(
+        JIRA_USER_BASE_REPLACE, config.jira_cloud_base)
     link = link.replace(JIRA_USER_TICKET_REPLACE, ticket_name)
-
 
     # Parse Reporter
     reporter = User(issue['fields']['reporter']['displayName'])
-    
+
     # Parse Assignee
-    assignee = User("")
+    assignee = User("Not Assigned")
     try:
         assignee.username = issue['fields']['assignee']['displayName']
     except:
@@ -57,7 +59,15 @@ def parse_query_specific_ticket(ticket_name):
 
     # Parse created At
     createdAt = issue['fields']['created']
+    createdAt = datetime.datetime.strptime(createdAt, '%Y-%m-%dT%H:%M:%S.%f%z')
 
-    ticket = Ticket(issueId,key,summary,ticket_name,[],createdAt,reporter,assignee,[], link)
+    # Parse Labels
+    labels = issue['fields']['labels']
+
+    # Parse Status
+    status = issue['fields']['status']['statusCategory']['name']
+
+    ticket = Ticket(issueId, key, summary, ticket_name, labels,
+                    createdAt, reporter, assignee, [], link, status)
 
     return ticket
