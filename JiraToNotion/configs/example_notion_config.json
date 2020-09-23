@@ -1,4 +1,5 @@
 {
   "token": "Token",
-  "base_page": "basePage"
+  "base_page": "basePage",
+  "theme": "[LIGHT|DARK]"
 }
