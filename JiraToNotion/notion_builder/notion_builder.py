@@ -1,33 +1,10 @@
-from notion.client import NotionClient
-from notion.block import TodoBlock
-from config_builder.config_builder import get_file_data
-import json
-import os
+from models.ticket import Ticket
+from constants.theme import Theme
+from models.notion_config import Notion_config
+from constants.collection_types import Collection_Type
+from notion_builder.collection_builder import create_ticket_collection, add_tickets_to_collection
 
 
-def test_insert_page():
-
-    notion_config_data = load_notion_configs()
-    token = notion_config_data['token']
-    base_page = notion_config_data['base_page']
-
-    # client
-    client = NotionClient(token_v2=token)
-
-    # Page to edit
-    page = client.get_block(base_page)
-
-    print("The current title is:", page.title)
-
-    page.title = "The title is changed"
-
-
-def load_notion_configs():
-    try:
-        config_path = os.path.abspath(
-            './JiraToNotion/configs/notion_config.json')
-        notion_data = get_file_data(config_path)
-    except:
-        print("Unable to locate the notion_config.json file. do you ahve one created in the root of the directory?")
-
-    return notion_data
+def test_insert_page(tickets: [Ticket]):
+    col = create_ticket_collection("Tickets", [Collection_Type.TABLE], tickets)
+    add_tickets_to_collection(tickets, Theme.LIGHT, col)
