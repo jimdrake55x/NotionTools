@@ -22,8 +22,8 @@ def query_active_sprints():
     return __make_jira_query_request(query)
 
 
-def query_issues_for_sprint(sprint):
-    jql_sprint = "sprint = " + str(sprint)
+def query_issues_for_sprint(sprintNumber):
+    jql_sprint = "sprint = " + str(sprintNumber)
     jql = json.dumps({
         "jql": jql_sprint,
         "fields": [

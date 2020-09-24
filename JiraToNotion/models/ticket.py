@@ -1,5 +1,3 @@
-
-
 class Ticket:
 
     def __init__(self, id, key, summary, title, labels, created_date, reporter, assignee, subtasks, link, status):
