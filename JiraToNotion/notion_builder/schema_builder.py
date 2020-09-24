@@ -1,4 +1,5 @@
 from models.ticket import Ticket
+import random
 
 
 def ticket_collection_scheme(tickets: [Ticket]):
@@ -39,7 +40,7 @@ def __labels_schema(tickets: [Ticket]):
             if label not in labels:
                 labels.append(label)
                 options.append({
-                    "color": "default",
+                    "color": __get_random_color(),
                     "id": "this-is-the-id-for-{0}".format(label),
                     "value": label,
                 })
@@ -51,12 +52,12 @@ def __status_schema(tickets: [Ticket]):
     options = []
     status = []
     for ticket in tickets:
-        if ticket.status not in status:
-            status.append(ticket.status)
+        if ticket.status.status not in status:
+            status.append(ticket.status.status)
             options.append({
-                "color": "default",
-                "id": "this-is-the-id-select-{0}".format(ticket.status),
-                "value": ticket.status,
+                "color": ticket.status.color,
+                "id": "this-is-the-id-select-{0}".format(ticket.status.status),
+                "value": ticket.status.status,
             })
 
     return options
@@ -71,3 +72,10 @@ def __ticket_type_schema(tickets: [Ticket]):
         }
     ]
     return options
+
+
+def __get_random_color():
+    colors = ["default", "gray", "brown", "orange",
+              "yellow", "green", "blue", "purple", "pink", "red"]
+    randomColor = random.randint(0, (len(colors) - 1))
+    return colors[randomColor]

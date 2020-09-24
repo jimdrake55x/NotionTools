@@ -1,10 +1,9 @@
-from models.sprint import Sprint
 from models.jira_config import Jira_Config
 from constants.constants import JIRA_API_JQL_URL, JIRA_API_EVAL_URL, JIRA_API_BASE_REPLACE, FOLDER_DATA, FOLDER_DATA_FILE, FOLDER_DATA_FILE_REPLACE, FILE_SPRINT_DATA, FILE_TICKETS_DATA, FOLDER_CONFIG_FILE, FOLDER_CONFIG_FILE_REPLACE, FILE_JIRA_CONFIG
+from requests.auth import HTTPBasicAuth
 import json
 import os
 import requests
-from requests.auth import HTTPBasicAuth
 
 
 # Public Methods

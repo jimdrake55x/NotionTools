@@ -5,6 +5,7 @@ from models.sprint import Sprint
 from models.ticket import Ticket
 from models.user import User
 from models.subtask import Subtask
+from models.status import Status
 import datetime
 
 
@@ -104,7 +105,8 @@ def __parse_ticket_from_issue(issue, cloudBase):
     labels = issue['fields']['labels']
 
     # Parse Status
-    status = issue['fields']['status']['statusCategory']['name']
+    status = Status(issue['fields']['status']['statusCategory']['name'],
+                    issue['fields']['status']['statusCategory']['colorName'])
 
     # Parse subtasks out
     subtasks = []
