@@ -1,6 +1,8 @@
 # Jira To Notion
 
-# Usage
+Jira to notion is an app that will take information from Jira, and export it directly into your notion workspace.
+
+## Usage
 
 Developed with Python 3.8 & Pip 20.1
 
@@ -8,7 +10,9 @@ Developed with Python 3.8 & Pip 20.1
 
 `python ./JiraToNotion/main.py`
 
-# Jira Integration
+Running this will insert your users current active sprint into the base page of notion.
 
-Jira integration is built on their Version 3 API for Jira Cloud Platform
-https://developer.atlassian.com/cloud/jira/platform/rest/v3/
+## Resources
+
+- [Python Notion API](https://github.com/jamalex/notion-py)
+- [Jira integration is built on their Version 3 API for Jira Cloud Platform](https://developer.atlassian.com/cloud/jira/platform/rest/v3/)
