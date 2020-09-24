@@ -28,9 +28,12 @@ def query_issues_for_sprint(sprint):
         "jql": jql_sprint,
         "fields": [
             "summary",
-            "status",
+            "created",
             "assignee",
-            "comment"
+            "reporter",
+            "subtasks",
+            "labels",
+            "status",
         ]
     })
 
@@ -55,6 +58,7 @@ def query_specific_issue(issue_name):
     return __make_jira_jql_request(jql)
 
 # Private methods
+
 
 def __make_jira_jql_request(jql):
     jira_config = Jira_Config()

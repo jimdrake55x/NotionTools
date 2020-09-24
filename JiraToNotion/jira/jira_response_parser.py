@@ -1,4 +1,4 @@
-from jira_builder.jira_builder import query_active_sprints, query_issues_for_sprint, query_specific_issue
+from jira.jira_builder import query_active_sprints, query_issues_for_sprint, query_specific_issue
 from constants.constants import JIRA_USER_TICKET, JIRA_USER_BASE_REPLACE, JIRA_USER_TICKET_REPLACE, FOLDER_CONFIG_FILE, FOLDER_CONFIG_FILE_REPLACE, FILE_JIRA_CONFIG
 from models.jira_config import Jira_Config
 from models.sprint import Sprint
