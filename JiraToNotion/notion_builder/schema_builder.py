@@ -64,13 +64,17 @@ def __status_schema(tickets: [Ticket]):
 
 
 def __ticket_type_schema(tickets: [Ticket]):
-    options = [
-        {
-            "color": "default",
-            "id": "this-is-id-for-type-{0}".format("Task"),
-            "value": "Task"
-        }
-    ]
+    options = []
+    types = []
+    for ticket in tickets:
+        if ticket.ticket_type not in types:
+            types.append(ticket.ticket_type)
+            options.append(
+                {
+                    "color": __get_random_color(),
+                    "id": "this-is-id-for-type-{0}".format(ticket.ticket_type),
+                    "value": ticket.ticket_type
+                })
     return options
 
 

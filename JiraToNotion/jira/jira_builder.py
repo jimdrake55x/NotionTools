@@ -33,6 +33,7 @@ def query_issues_for_sprint(sprintNumber):
             "subtasks",
             "labels",
             "status",
+            "issuetype"
         ]
     })
 

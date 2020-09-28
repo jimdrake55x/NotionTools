@@ -56,7 +56,7 @@ def add_tickets_to_collection(tickets: [Ticket], theme: Theme, collection):
 
         # Add Status
         newRow.status = ticket.status.status
-        newRow.ticket_type = "Task"
+        newRow.ticket_type = ticket.ticket_type
 
         __add_ticket_summary(ticket, newRow)
 

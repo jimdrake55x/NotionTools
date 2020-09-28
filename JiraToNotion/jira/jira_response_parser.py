@@ -20,25 +20,6 @@ def parse_active_sprint_id_response(response):
     return active_sprints
 
 
-def parse_query_active_sprints_response(response):
-    response = response['value']
-
-    active_sprints = []
-
-    for sprint in response['active_sprints']:
-        active_sprints.append(
-            Sprint(sprint['name'], sprint['startDate'], sprint['endDate'], sprint['id'], []))
-
-    for sprint in active_sprints:
-        response = query_issues_for_sprint(sprint.id)
-        for ticket in response['issues']:
-            name = ticket['key']
-            fields = ticket['fields']
-            summary = fields['summary']
-            sprint.tickets.append(Ticket(name, summary, "", ""))
-    return active_sprints
-
-
 def parse_query_tickets_for_sprint_response(response):
     issues = response['issues']
     config = Jira_Config()
@@ -47,23 +28,7 @@ def parse_query_tickets_for_sprint_response(response):
         tickets.append(__parse_ticket_from_issue(
             issue, config.jira_cloud_base))
 
-    # This is needed because Jira API does not return Issue-type on top level issues
-    # So, when you query a whole sprint, you'll get issues and subtasks at top level, and then
-    # Issues will also have their subtasks listed.
-
-    # So here, we go through each issue, and all their subtasks to a list, and then
-    # Remove those subtasks from the top level issues.
-    subtaskKeys = []
-    for ticket in tickets:
-        for subtask in ticket.subtasks:
-            if subtask.key not in subtaskKeys:
-                subtaskKeys.append(subtask.key)
-
-    mainTickets = []
-    for ticket in tickets:
-        if ticket.key not in subtaskKeys:
-            mainTickets.append(ticket)
-
+    mainTickets = list(filter(lambda x: x.ticket_type != "Sub-Task", tickets))
     return mainTickets
 
 
@@ -113,7 +78,10 @@ def __parse_ticket_from_issue(issue, cloudBase):
     for subtask in issue['fields']['subtasks']:
         subtasks.append(Subtask(subtask['key']))
 
+    # Parse type
+    ticket_type = issue['fields']['issuetype']['name']
+
     ticket = Ticket(issueId, key, summary, key, labels,
-                    createdAt, reporter, assignee, subtasks, link, status)
+                    createdAt, reporter, assignee, subtasks, link, status, ticket_type)
 
     return ticket
