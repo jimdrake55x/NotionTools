@@ -1,0 +1,42 @@
+from __future__ import print_function, unicode_literals
+from PyInquirer import prompt, Separator
+from pprint import pprint
+from jira.jira import get_specific_ticket, get_active_sprint_id, get_tickets_for_sprint
+from notion_builder.notion_builder import get_base_page_title, test_insert_page
+from constants.constants import JTN_VERSION
+
+
+def get_delivery_options(answers):
+    options = ['bike', 'car', 'truck']
+    if answers['size'] == 'jumbo':
+        options.append('helicopter')
+    return options
+
+
+def print_CLI():
+    # General info
+    print("=== JTN Version {} ===\n\n".format(JTN_VERSION))
+
+    sprintId = get_active_sprint_id()[0]
+    tickets = get_tickets_for_sprint(sprintId.number)
+
+    questions = [
+        {
+            'type': 'list',
+            'name': 'firstStep',
+            'message': 'What would you like to do?',
+            'choices': [
+                'Import all tickets from \'{0}\''.format(sprintId.name),
+                'Import specific tickets...',
+            ]
+        }
+    ]
+
+    answer = prompt(questions)
+
+    if answer['firstStep'] == 'Import specific tickets...':
+        print('Not implemented yet...')
+    else:
+        print("Inserting tickets into notion...")
+        test_insert_page(tickets)
+        print("Done with tickets...")

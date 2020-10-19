@@ -25,3 +25,4 @@ toml==0.10.0
 tzlocal==2.1
 urllib3==1.25.9
 wrapt==1.12.1
+PyInquirer==1.0.3

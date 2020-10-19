@@ -10,6 +10,17 @@ from constants.icons import Icon
 from utilities.icon_builder import get_icon
 
 
+def get_page_title(page):
+
+    # Get notion config
+    notion_config = Notion_config()
+
+    client = NotionClient(token_v2=notion_config.token)
+    page = client.get_block(page)
+
+    return page.title
+
+
 def create_ticket_collection(title, views: [Collection_Type], tickets: [Ticket]):
 
     # Get notion config settings
