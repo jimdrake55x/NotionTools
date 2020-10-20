@@ -35,8 +35,23 @@ def print_CLI():
     answer = prompt(questions)
 
     if answer['firstStep'] == 'Import specific tickets...':
-        print('Not implemented yet...')
-    else:
-        print("Inserting tickets into notion...")
-        test_insert_page(tickets)
-        print("Done with tickets...")
+        ticketKeys = []
+        for ticket in tickets:
+
+            ticketKeys.append({'name': ticket.key})
+        questions = [
+            {
+                'type': 'checkbox',
+                'name': 'tickets',
+                'message': 'Which tickets?',
+                'choices': ticketKeys
+            }
+        ]
+        answer = prompt(questions)
+        ticketNames = answer['tickets']
+        ticketsToImport = list(filter(lambda x: x.key in ticketNames, tickets))
+        tickets = ticketsToImport
+
+    print("Inserting tickets into notion...")
+    test_insert_page(tickets)
+    print("Done with tickets...")
