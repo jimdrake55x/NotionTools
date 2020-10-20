@@ -37,8 +37,8 @@ def print_CLI():
     if answer['firstStep'] == 'Import specific tickets...':
         ticketKeys = []
         for ticket in tickets:
-
             ticketKeys.append({'name': ticket.key})
+
         questions = [
             {
                 'type': 'checkbox',
