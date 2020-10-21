@@ -52,6 +52,7 @@ def query_specific_issue(issue_name):
             "subtasks",
             "labels",
             "status",
+            "issuetype"
         ]
     })
 

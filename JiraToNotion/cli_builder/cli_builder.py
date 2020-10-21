@@ -19,6 +19,9 @@ def print_CLI():
 
     sprintId = get_active_sprint_id()[0]
     tickets = get_tickets_for_sprint(sprintId.number)
+    allChoice = 'Import all tickets from \'{0}\''.format(sprintId.name)
+    someChoice = 'Import specific tickets from \'{0}\''.format(sprintId.name)
+    oneChoice = 'Import a specific ticket...'
 
     questions = [
         {
@@ -26,15 +29,14 @@ def print_CLI():
             'name': 'firstStep',
             'message': 'What would you like to do?',
             'choices': [
-                'Import all tickets from \'{0}\''.format(sprintId.name),
-                'Import specific tickets...',
+                allChoice, someChoice, oneChoice
             ]
         }
     ]
 
     answer = prompt(questions)
 
-    if answer['firstStep'] == 'Import specific tickets...':
+    if answer['firstStep'] == someChoice:
         ticketKeys = []
         for ticket in tickets:
             ticketKeys.append({'name': ticket.key})
@@ -51,6 +53,19 @@ def print_CLI():
         ticketNames = answer['tickets']
         ticketsToImport = list(filter(lambda x: x.key in ticketNames, tickets))
         tickets = ticketsToImport
+    elif answer['firstStep'] == oneChoice:
+        questions = [
+            {
+                'type': 'input',
+                'name': 'ticket_key',
+                'message': 'What is the Ticket Key? (ex. CBUPT-XXXX)'
+            }
+        ]
+
+        answer = prompt(questions)
+        ticketKey = answer['ticket_key']
+        ticket = get_specific_ticket(ticketKey)
+        tickets = [ticket]
 
     print("Inserting tickets into notion...")
     test_insert_page(tickets)
