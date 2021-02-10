@@ -1,4 +1,4 @@
-from jira.jira_builder import query_active_sprints, query_issues_for_sprint, query_specific_issue
+from jira.jira_builder import query_active_sprints, query_specific_issue
 from constants.constants import JIRA_USER_TICKET, JIRA_USER_BASE_REPLACE, JIRA_USER_TICKET_REPLACE, FOLDER_CONFIG_FILE, FOLDER_CONFIG_FILE_REPLACE, FILE_JIRA_CONFIG
 from models.jira_config import Jira_Config
 from models.sprint import Sprint
@@ -28,7 +28,8 @@ def parse_query_tickets_for_sprint_response(response):
         tickets.append(__parse_ticket_from_issue(
             issue, config.jira_cloud_base))
 
-    mainTickets = list(filter(lambda x: x.ticket_type != "Sub-Task", tickets))
+    mainTickets = list(filter(lambda x: x.ticket_type not in [
+                       "Sub-Task", "Sub-Defect"], tickets))
     return mainTickets
 
 

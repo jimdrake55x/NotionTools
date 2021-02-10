@@ -19,3 +19,4 @@ class Jira_Config():
         self.token = jira_data['token']
         self.board_number = jira_data['board_number']
         self.jira_cloud_base = jira_data['jira_cloud_base']
+        self.jira_sort_property_id = jira_data['jira_sort_property_id']

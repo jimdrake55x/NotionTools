@@ -34,7 +34,27 @@ def query_issues_for_sprint(sprintNumber):
             "labels",
             "status",
             "issuetype"
-        ]
+        ],
+        "maxResults": 150
+    })
+
+    return __make_jira_jql_request(jql)
+
+def query_issues_for_sprint_ordered(sprintNumber, orderByProperty):
+    jql_sprint = "sprint = " + str(sprintNumber) + " order by cf[" + str(orderByProperty) +"]"
+    jql = json.dumps({
+        "jql": jql_sprint,
+        "fields": [
+            "summary",
+            "created",
+            "assignee",
+            "reporter",
+            "subtasks",
+            "labels",
+            "status",
+            "issuetype"
+        ],
+        "maxResults": 150
     })
 
     return __make_jira_jql_request(jql)
@@ -52,6 +72,7 @@ def query_specific_issue(issue_name):
             "subtasks",
             "labels",
             "status",
+            "issuetype"
         ]
     })
 

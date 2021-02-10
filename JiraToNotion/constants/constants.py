@@ -25,4 +25,4 @@ FILE_TICKET_DATA = 'data_ticket.json'
 FILE_JIRA_CONFIG = 'jira_config.json'
 FILE_NOTION_CONFIG = 'notion_config.json'
 
-JTN_VERSION = "0.0.1"
+JTN_VERSION = "0.0.3"

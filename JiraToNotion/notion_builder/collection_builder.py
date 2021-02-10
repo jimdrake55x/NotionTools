@@ -8,6 +8,7 @@ from models.ticket import Ticket
 from constants.theme import Theme
 from constants.icons import Icon
 from utilities.icon_builder import get_icon
+from datetime import datetime
 
 
 def get_page_title(page):
@@ -38,7 +39,9 @@ def create_ticket_collection(title, views: [Collection_Type], tickets: [Ticket])
                              schema=ticket_collection_scheme(tickets))
     )
 
-    collection.title = title
+    now = datetime.now()
+    dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
+    collection.title = title + ' ' + dt_string
 
     # Add desired Views
     for view in views:
