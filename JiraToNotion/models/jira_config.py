@@ -1,14 +1,19 @@
-from constants.constants import FOLDER_CONFIG_FILE, FOLDER_CONFIG_FILE_REPLACE, FILE_JIRA_CONFIG
+from constants.constants import FOLDER_CONFIG_FILE_REPLACE, FILE_JIRA_CONFIG, CONFIG_FOLDER
 from config_builder.config_builder import get_file_data
 import os
 
 
+import os
+dirname = os.path.dirname(__file__)
+filename = os.path.join(dirname, 'relative/path/to/file/you/want')
 
 class Jira_Config():
 
     def __init__(self):
         try:
-            jira_config = FOLDER_CONFIG_FILE.replace(
+
+            config_path = os.path.split(os.path.dirname(__file__))[0] + CONFIG_FOLDER
+            jira_config = config_path.replace(
                 FOLDER_CONFIG_FILE_REPLACE, FILE_JIRA_CONFIG)
             config_path = os.path.abspath(jira_config)
             jira_data = get_file_data(config_path)

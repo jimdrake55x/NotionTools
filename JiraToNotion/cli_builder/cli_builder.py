@@ -13,6 +13,15 @@ def get_delivery_options(answers):
         options.append('helicopter')
     return options
 
+def action_CLI(arg):
+    if arg == "-pa":
+        print_notes(True)
+    elif arg == "-pu":
+        print_notes(False)
+    else:
+        print("Unsupported Arg")
+
+
 
 def print_CLI():
     # General info
