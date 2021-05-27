@@ -1,5 +1,5 @@
 from jira.jira_builder import query_active_sprints, query_specific_issue
-from constants.constants import JIRA_USER_TICKET, JIRA_USER_BASE_REPLACE, JIRA_USER_TICKET_REPLACE, FOLDER_CONFIG_FILE, FOLDER_CONFIG_FILE_REPLACE, FILE_JIRA_CONFIG
+from constants.constants import JIRA_USER_TICKET, JIRA_USER_BASE_REPLACE, JIRA_USER_TICKET_REPLACE, FILE_JIRA_CONFIG
 from models.jira_config import Jira_Config
 from models.sprint import Sprint
 from models.ticket import Ticket
