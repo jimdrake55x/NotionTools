@@ -1,6 +1,14 @@
 # Jira To Notion
 
-Jira to notion is an app that will take information from Jira, and export it directly into your notion workspace.
+## Summary
+
+Jira to notion is a collection of tools for import Jira ticket information into different platforms.
+
+### Functionality
+
+- Import All, some, or specific tickets from your current sprint into Notion.
+- Print All or only unfinished tickets to console to use in slack as notes.
+- Zapier script to fetch unfinished tickets for use in other actions.
 
 ## Usage
 
@@ -10,7 +18,11 @@ Developed with Python 3.8 & Pip 20.1
 
 `python ./JiraToNotion/main.py`
 
-Running this will insert your users current active sprint into the base page of notion.
+You will be presented with a CLI menu.
+
+---
+
+If you'd like to use the zapier script, you can find it here `./sprint_notes_builder/zapier_notes_builder.py`. Instructions are in the script. 
 
 ## Resources
 
